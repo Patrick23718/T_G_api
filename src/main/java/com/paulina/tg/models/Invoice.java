@@ -1,13 +1,15 @@
 package com.paulina.tg.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,29 +17,18 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Category {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-
-    private String name;
-    private boolean active = true;
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "category")
-    private List<Product> products;
+    private String invoiceCode;
+    private LocalDateTime invoiceDate;
+    private BigDecimal invoiceAmount;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    // Constructor
-    public Category(String name) {
-        this.name = name;
-        this.active = true;
-    }
 }

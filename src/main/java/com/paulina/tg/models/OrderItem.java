@@ -1,13 +1,12 @@
 package com.paulina.tg.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,19 +14,21 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Category {
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    private int quantity;
+    private BigDecimal price;
 
-    private String name;
-    private boolean active = true;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "category")
-    private List<Product> products;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -35,9 +36,11 @@ public class Category {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    // Constructor
-    public Category(String name) {
-        this.name = name;
-        this.active = true;
+    public OrderItem(Order order, Product product, int quantity, BigDecimal price) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+
     }
 }
