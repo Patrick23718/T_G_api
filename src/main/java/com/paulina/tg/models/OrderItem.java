@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +23,9 @@ public class OrderItem {
     private int quantity;
     private BigDecimal price;
 
+    @OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Restock> restocks;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
@@ -36,11 +40,5 @@ public class OrderItem {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public OrderItem(Order order, Product product, int quantity, BigDecimal price) {
-        this.order = order;
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
 
-    }
 }

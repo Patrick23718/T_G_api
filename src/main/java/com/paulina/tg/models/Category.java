@@ -35,9 +35,4 @@ public class Category {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    // Constructor
-    public Category(String name) {
-        this.name = name;
-        this.active = true;
-    }
 }
