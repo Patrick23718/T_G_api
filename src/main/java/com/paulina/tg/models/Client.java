@@ -21,27 +21,12 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column()
     private String fullName;
-
-    @Column()
     private String email;
-
-    @Column()
     private String phone;
-
-    @Column()
     private String address;
-
-    @Column()
     private String city;
-
-    @Column()
     private String country;
-
-//    @OneToMany(mappedBy = "client")
-//    @JsonManagedReference
-//    private List<Order> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;

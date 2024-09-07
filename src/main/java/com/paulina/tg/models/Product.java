@@ -41,23 +41,4 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public Product(
-            String name,
-            String brand,
-            BigDecimal price,
-            int inventory,
-            int secure_inventory,
-            String description,
-            boolean active,
-            Category category
-    ) {
-        this.name = name;
-        this.brand = brand;
-        this.price = price;
-        this.inventory = inventory;
-        this.secure_inventory = secure_inventory;
-        this.description = description;
-        this.active = active;
-        this.category = category;
-    }
 }

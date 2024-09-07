@@ -1,7 +1,7 @@
 package com.paulina.tg.services.category;
 
 import com.paulina.tg.exceptions.AlreadyExistException;
-import com.paulina.tg.exceptions.RessourceNotFoundException;
+import com.paulina.tg.exceptions.ResourceNotFoundException;
 import com.paulina.tg.models.Category;
 import com.paulina.tg.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public Category findCategoryById(String id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new RessourceNotFoundException("Category with id: " + id + " not found"));
+        return categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category with id: " + id + " not found"));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class CategoryService implements ICategoryService {
         return Optional.ofNullable(findCategoryById(categoryId)).map(oldCategory -> {
             oldCategory.setName(name);
             return categoryRepository.save(oldCategory);
-        }) .orElseThrow(()-> new RessourceNotFoundException("Category not found!"));
+        }) .orElseThrow(()-> new ResourceNotFoundException("Category not found!"));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class CategoryService implements ICategoryService {
         Optional.ofNullable(findCategoryById(categoryId)).map(oldCategory -> {
             oldCategory.setActive(true);
             return categoryRepository.save(oldCategory);
-        }) .orElseThrow(()-> new RessourceNotFoundException("Category not found!"));
+        }) .orElseThrow(()-> new ResourceNotFoundException("Category not found!"));
 
     }
 
@@ -67,6 +67,6 @@ public class CategoryService implements ICategoryService {
         Optional.ofNullable(findCategoryById(categoryId)).map(oldCategory -> {
             oldCategory.setActive(false);
             return categoryRepository.save(oldCategory);
-        }) .orElseThrow(()-> new RessourceNotFoundException("Category not found!"));
+        }) .orElseThrow(()-> new ResourceNotFoundException("Category not found!"));
     }
 }
