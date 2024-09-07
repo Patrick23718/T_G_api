@@ -10,7 +10,7 @@ public interface IClientService {
     Client getClientById(String id);
     List<Client> getAllClients(String name, Pageable pageable);
     Client createClient(ClientRequest client);
-    Client updateClient(ClientRequest client);
+    Client updateClient(ClientRequest client, String id);
     void deleteClient(String id);
 
 }
